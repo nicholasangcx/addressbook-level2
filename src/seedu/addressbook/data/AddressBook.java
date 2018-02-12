@@ -42,6 +42,7 @@ public class AddressBook {
      */
     public AddressBook(UniquePersonList persons, UniqueTagList tags) {
         this.allPersons = new UniquePersonList(persons);
+        allPersons.sortPersonList();
         this.allTags = new UniqueTagList(tags);
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
@@ -80,6 +81,7 @@ public class AddressBook {
      */
     public void addPerson(Person toAdd) throws DuplicatePersonException {
         allPersons.add(toAdd);
+        allPersons.sortPersonList();
         syncTagsWithMasterList(toAdd);
     }
 
