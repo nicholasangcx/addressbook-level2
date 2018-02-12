@@ -8,14 +8,9 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street, some unit, some postal code";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in (block, street, unit, postal code) format";
+    public static final String EXAMPLE = "123, some street";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in block, street format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
-    Block block;
-    Street street;
-    Unit unit;
-    PostalCode postalCode;
 
     public final String value;
     private boolean isPrivate;
@@ -27,7 +22,6 @@ public class Address {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         String trimmedAddress = address.trim();
-        splitAddress(trimmedAddress);
         this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
@@ -35,14 +29,6 @@ public class Address {
         this.value = trimmedAddress;
     }
 
-    private void splitAddress(String trimmedAddress) {
-        String delimiter = ",";
-        String[] tokens = trimmedAddress.split(delimiter);
-        this.block = new Block(tokens[0]);
-        this.street = new Street(tokens[1]);
-        this.unit = new Unit(tokens[2]);
-        this.postalCode = new PostalCode(tokens[3]);
-    }
 
     /**
      * Returns true if a given string is a valid person address.

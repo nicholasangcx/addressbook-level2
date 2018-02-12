@@ -4,6 +4,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Represents a Person's name in the address book.
@@ -37,10 +38,15 @@ public class Name {
     }
 
     /**
-     * Retrieves a listing of every word in the name, in order.
+     * Retrieves a listing of every word in the name, in lower case, in order.
      */
     public List<String> getWordsInName() {
-        return Arrays.asList(fullName.split("\\s+"));
+        List<String> wordsInName = Arrays.asList(fullName.split("\\s+"));
+        ListIterator<String> iterator = wordsInName.listIterator();
+        while (iterator.hasNext()) {
+            iterator.set(iterator.next().toLowerCase());
+        }
+        return wordsInName;
     }
 
     @Override
